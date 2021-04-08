@@ -1,29 +1,48 @@
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import HomeView from './Views/HomeView';
-import RegisterView from './Views/RegisterView';
-import LoginView from './Views/LoginView';
-import ContactsView from './Views/ContactsView';
 import AppBar from './Components/AppBar';
+import { getCurrentUser } from './redux/user/user-operations';
+import PrivateRoute from './Components/PrivateRoute';
+import PublicRoute from './Components/PublicRoute';
+
+const HomeView = lazy(() => import('./Views/HomeView'));
+const LoginView = lazy(() => import('./Views/LoginView'));
+const RegisterView = lazy(() => import('./Views/RegisterView'));
+const ContactsView = lazy(() => import('./Views/ContactsView'));
 
 const App = () => {
-  //     const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authOperations.fetchCurrentUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
       <AppBar />
-
-      <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route path="/register" component={RegisterView} />
-        <Route path="/login" component={LoginView} />
-        <Route path="/contacts" component={ContactsView} />
-      </Switch>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Switch>
+          <Route exact path="/" component={HomeView} />
+          <PublicRoute
+            path="/register"
+            component={RegisterView}
+            restricted
+            redirectTo="/"
+          />
+          <PublicRoute
+            path="/login"
+            restricted
+            component={LoginView}
+            redirectTo="/"
+          />
+          <PrivateRoute
+            path="/contacts"
+            component={ContactsView}
+            redirectTo="/login"
+          />
+        </Switch>
+      </Suspense>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import register from '../redux/user/user-operations';
+import { register } from '../redux/user/user-operations';
 
 const styles = {
   form: {

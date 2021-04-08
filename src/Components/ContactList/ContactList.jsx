@@ -18,7 +18,7 @@ const ContactList = () => {
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   const contacts = useSelector(getVisibleContacts);
   const classes = useStyles();

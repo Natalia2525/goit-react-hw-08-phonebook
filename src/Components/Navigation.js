@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import { getIsAunteficated } from '../redux/user/user-selectors';
+import { useDispatch, useSelector } from 'react-redux';
 
 const styles = {
   link: {
@@ -13,21 +15,25 @@ const styles = {
   },
 };
 
-const Navigation = () => (
-  <nav>
-    <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-      Главная
-    </NavLink>
-
-    <NavLink
-      to="/contacts"
-      exact
-      style={styles.link}
-      activeStyle={styles.activeLink}
-    >
-      Контакты
-    </NavLink>
-  </nav>
-);
+const Navigation = () => {
+  const isLogined = useSelector(getIsAunteficated);
+  return (
+    <nav>
+      <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
+        Главная
+      </NavLink>
+      {isLogined && (
+        <NavLink
+          to="/contacts"
+          exact
+          style={styles.link}
+          activeStyle={styles.activeLink}
+        >
+          Контакты
+        </NavLink>
+      )}
+    </nav>
+  );
+};
 
 export default Navigation;

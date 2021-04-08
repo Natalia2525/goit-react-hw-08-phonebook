@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-// import { authSelectors, authOperations } from '../../redux/auth';
+import { getUserEmail } from '../redux/user/user-selectors';
+import { logOut } from '../redux/user/user-operations';
 
 const styles = {
   container: {
@@ -17,15 +18,14 @@ const styles = {
 
 const UserMenu = () => {
   const dispatch = useDispatch();
-  // const name = useSelector(authSelectors.getUsername);
-
+  const email = useSelector(getUserEmail);
   return (
     <div style={styles.container}>
-      {/* <img src={avatar} alt="" width="32" style={styles.avatar} /> */}
-      <span style={styles.name}>Добро пожаловать, </span>
-      <button type="button">Выйти</button>
+      <span style={styles.name}>{email} </span>
+      <button type="button" onClick={() => dispatch(logOut())}>
+        Выйти
+      </button>
     </div>
   );
 };
 export default UserMenu;
-// onClick={() => dispatch(authOperations.logOut())}

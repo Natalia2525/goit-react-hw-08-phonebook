@@ -1,20 +1,20 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const registerRequest = createAction('auth/registerRequest');
-const registerSuccess = createAction('auth/registerSuccess');
-const registerError = createAction('auth/registerError');
+const registerRequest = createAction('user/registerRequest');
+const registerSuccess = createAction('user/registerSuccess');
+const registerError = createAction('user/registerError');
 
-const loginRequest = createAction('auth/loginRequest');
-const loginSuccess = createAction('auth/loginSuccess');
-const loginError = createAction('auth/loginError');
+const loginRequest = createAction('user/loginRequest');
+const loginSuccess = createAction('user/loginSuccess');
+const loginError = createAction('user/loginError');
 
-const logoutRequest = createAction('auth/logoutRequest');
-const logoutSuccess = createAction('auth/logoutSuccess');
-const logoutError = createAction('auth/logoutError');
+const logoutRequest = createAction('user/logoutRequest');
+const logoutSuccess = createAction('user/logoutSuccess');
+const logoutError = createAction('user/logoutError');
 
-const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
-const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
-const getCurrentUserError = createAction('auth/getCurrentUserError');
+const getCurrentUserRequest = createAction('user/getCurrentUserRequest');
+const getCurrentUserSuccess = createAction('user/getCurrentUserSuccess');
+const getCurrentUserError = createAction('user/getCurrentUserError');
 
 export {
   registerRequest,

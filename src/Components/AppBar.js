@@ -4,22 +4,31 @@ import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
 import { getIsAunteficated } from '../redux/user/user-selectors';
 
-const styles = {
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar1 from '@material-ui/core/AppBar';
+
+
+const useStyles = makeStyles((theme) =>({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: '1px solid #2A363B',
   },
-};
+  app: {
+    backgroundColor: '#f8ab8d',
+  },
+}));
 
- const AppBar = () => {
+const AppBar = () => {
+   const classes = useStyles();
   const IsAunteficated = useSelector(getIsAunteficated);
-  return (
-    <header style={styles.header}>
-      <Navigation />
-      {IsAunteficated ? <UserMenu /> : <AuthNav />}
-    </header>
-  );
+   return (
+     <AppBar1 position="static" className={classes.app}>
+         <header className={classes.header}>
+           <Navigation />
+           {IsAunteficated ? <UserMenu /> : <AuthNav />}
+         </header>
+     </AppBar1>
+   );
 }
 export default AppBar;

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { getIsAunteficated } from '../redux/user/user-selectors';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
 const styles = {
   link: {
